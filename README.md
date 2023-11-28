@@ -1,7 +1,5 @@
-# Здесь будет ваш проект на Реакте с авторизацией и регистрацией
+# Проект: Место
 
-Используйте ваши предыдущие наработки по проекту Mesto. Это может быть работа 11-го спринта или его улучшенная версия после 2-х последних спринтов. 
+**Description**
+This project is an interactive page where you can add and delete photos, as well as change your profile information and, of course, rate photos by the number of likes. The project is implemented using React, hooks are used in the development process. Moreover, authorization and registration are implemented here
 
-Все запросы на авторизацию, регистрацию и проверку токена должны работать через сервис `https://auth.nomoreparties.co`. Остальные запросы, не относящиеся к этой проектной работе могут быть к бэкенду из предыдущих спринтов.
-
-Успехов!

@@ -1,0 +1,14 @@
+.elements {
+    margin: 0 auto 63px auto;
+    max-width: 880px;
+    display: flex;
+    column-gap: 17px;
+    row-gap: 18px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1279px) {
+    .elements {
+        margin-bottom: 47px;
+    }
+}
