@@ -24,18 +24,18 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
 
     return (
         <div className="elements__list">
-              <div className="element">
-                <img className="element__mask-group" style={{ backgroundImage: `url(${card.link})` }} src={card.link} alt={card.name} onClick={handleClick} /> 
-                {isOwn &&<button className="element__trash" type="button" onClick={handleDeleteClick}/>}
-                <div className="element__container">
-                  <h2 className="element__title">{card.name}</h2>
-                  <div className="element__group-like">
-                    <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick} />
-                    <p className="element__like">{card.likes.length}</p>
-                  </div>
-                </div>
+          <div className="element">
+            <img className="element__mask-group" src={card.link} alt={card.name} onClick={handleClick} /> 
+            {isOwn &&<button className="element__trash" type="button" onClick={handleDeleteClick}/>}
+            <div className="element__container">
+              <h2 className="element__title">{card.name}</h2>
+              <div className="element__group-like">
+                <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick} />
+                <p className="element__like">{card.likes.length}</p>
               </div>
             </div>
+          </div>
+        </div>
     )
 }
 

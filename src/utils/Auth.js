@@ -1,6 +1,6 @@
 class Auth {
-    constructor(base_url) {
-        this.base_url = base_url
+    constructor(baseUrl) {
+        this.baseUrl = baseUrl
     }
 
     _checkResponse(res) {
@@ -11,7 +11,7 @@ class Auth {
     }
 
     registerUser(email, password) {
-        return fetch(`${this.base_url}/signup`, {
+        return fetch(`${this.baseUrl}/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -22,12 +22,12 @@ class Auth {
                 password: password})
         })
         .then((res) => {
-            this._checkResponse(res)
+          return this._checkResponse(res)
         })
     }
 
     authUser(email, password) {
-        return fetch(`${this.base_url}/signin`, {
+        return fetch(`${this.baseUrl}/signin`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'  
@@ -38,7 +38,7 @@ class Auth {
     }
 
     checkToken(token) {
-        return fetch(`${this.base_url}/users/me`, {
+        return fetch(`${this.baseUrl}/users/me`, {
             method: 'GET',
             headers: {
                 'Content-Type': "application/json",
@@ -46,7 +46,7 @@ class Auth {
             }
         })
         .then((res) => {
-            this._checkResponse(res)
+          return this._checkResponse(res)
         })
     }
 }
