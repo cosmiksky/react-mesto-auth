@@ -40,71 +40,70 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
     api.getUserInfo()
-    .then((userInfo) => {
-      setCurrentUser(userInfo)
-    })
-    .catch(() => {
-      console.error('ошибка получения данных')
-    })
+       .then((userInfo) => {
+          setCurrentUser(userInfo)
+        })
+       .catch(() => {
+          console.error('ошибка получения данных')
+        })
   }}, [loggedIn])
 
   React.useEffect(() => {
     if (loggedIn) {
     api.getAllCards()
-    .then((cards) => {
-      setCards(cards)
-    })
-    .catch(() => {
-      console.error('Ошибка загрузки карточек')
-    })
+       .then((cards) => {
+          setCards(cards)
+        })
+       .catch(() => {
+          console.error('Ошибка загрузки карточек')
+        })
   }}, [loggedIn])
 
   const handleSignUp = (email, password) => {
     auth.registerUser(email, password)
-    .then((res) => {
-      setIsTooltipSuccessPopup(true)
-      setTimeout(() => {
-        navigate('/sign-in', {replace: true})
-      }, 2000)
-    })
-    .catch(() => {
-      console.error('Что-то пошло не так! Попробуйте еще раз')
-      setIsTooltipErrorPopup(true);
-    })
+        .then((res) => {
+          setIsTooltipSuccessPopup(true)
+          setTimeout(() => {
+          navigate('/sign-in', {replace: true})
+          }, 2000)
+        })
+        .catch(() => {
+          console.error('Что-то пошло не так! Попробуйте еще раз')
+          setIsTooltipErrorPopup(true);
+        })
   }
 
   const handleSignIn = ({email, password}) => {
     auth.authUser(email, password)
-    .then((res) => {
-      if(res.token) {
-        localStorage.setItem("token", res.token);
-        setUserEmail(email);
-        setLoggedIn(true);
-        setIsTooltipSuccessPopup(true)
-        navigate("/", {replace: true})
-        return res
-      }
-    })
-    .catch(() => {
-      console.error('Что-то пошло не так! Попробуйте еще раз')
-      setIsTooltipErrorPopup(true);
-    })
+        .then((res) => {
+          if(res.token) {
+            localStorage.setItem("token", res.token);
+            setUserEmail(email);
+            setLoggedIn(true);
+            navigate("/", {replace: true})
+            return res
+          }
+        })
+        .catch(() => {
+          console.error('Что-то пошло не так! Попробуйте еще раз')
+          setIsTooltipErrorPopup(true);
+        })
   }
 
 
   const handleCheckToken = (jwt) => {
     console.log(jwt)
       auth.checkToken(jwt)
-      .then((res) => {
-        if(res) {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          navigate('/', {replace: true})
-        }
-      })
-      .catch(() => {
-        console.error(`Ошибка авторизации`);
-      })
+          .then((res) => {
+            if(res) {
+              setLoggedIn(true);
+              setUserEmail(res.data.email);
+              navigate('/', {replace: true})
+            }
+          })
+          .catch(() => {
+            console.error(`Ошибка авторизации`);
+          })
   }
 
   React.useEffect(() => {
@@ -117,35 +116,35 @@ function App() {
 
   function handleUpdateUser({name, about}) {
     api.pathUserInfo(name, about)
-    .then((updatedUser) => {
-      setCurrentUser(updatedUser);
-      closeAllPopups();
-   })
-    .catch(() => {
-      console.error('ошибка обновления данных')
-    })
+       .then((updatedUser) => {
+         setCurrentUser(updatedUser);
+         closeAllPopups();
+       })
+       .catch(() => {
+         console.error('ошибка обновления данных')
+       })
   }
 
   function handleUpdateAvatar(newAvatar) {
     api.changeAvatar(newAvatar.avatar)
-    .then((user) => {
-        setCurrentUser({...currentUser, avatar: user.avatar});
-        closeAllPopups();
-    })
-    .catch(() => {
-      console.error('ошибка обновления данных')
-      });
-  }
+       .then((user) => {
+         setCurrentUser({...currentUser, avatar: user.avatar});
+         closeAllPopups();
+       })
+       .catch(() => {
+         console.error('ошибка обновления данных')
+       });
+  } 
 
   function handleAddPlaceSubmit({name, link}) {
     api.createCard(name, link)
-    .then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
-    })
-    .catch(() => {
-      console.error('ошибка обновления данных')
-      });
+       .then((newCard) => {
+         setCards([newCard, ...cards]);
+         closeAllPopups();
+       })
+       .catch(() => {
+        console.error('ошибка обновления данных')
+       });
   }
 
   function handleCardLike(card) {
@@ -154,22 +153,22 @@ function App() {
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch(() => {
-      console.error('ошибка')
-    })
+       .then((newCard) => {
+         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+       })
+       .catch(() => {
+         console.error('ошибка')
+       })
 }
 
   function handleDeleteCard(card) {
     api.deleteCard(card._id)
-    .then(() => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id));
-    })
-    .catch(() => {
-      console.error('error')
-    })
+       .then(() => {
+         setCards((cards) => cards.filter((c) => c._id !== card._id));
+       })
+       .catch(() => {
+         console.error('error')
+       })
   }
 
   function handleEditProfileClick() {
